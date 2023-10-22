@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Multi Select'),
+      home: MyHomePage(title: 'Flutter Multi Select', key: Key('home'),),
     );
   }
 }
@@ -24,13 +24,13 @@ class Animal {
   final String name;
 
   Animal({
-    this.id,
-    this.name,
+    required this.id,
+    required this.name,
   });
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({required Key key, required this.title}) : super(key: key);
   final String title;
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
       .map((animal) => MultiSelectItem<Animal>(animal, animal.name))
       .toList();
   //List<Animal> _selectedAnimals = [];
-  List<Animal> _selectedAnimals2 = [];
+  List<Object?> _selectedAnimals2 = [];
   List<Animal> _selectedAnimals3 = [];
   //List<Animal> _selectedAnimals4 = [];
   List<Animal> _selectedAnimals5 = [];
@@ -196,14 +196,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     _selectedAnimals3 = values;
                   });
-                  _multiSelectKey.currentState.validate();
+                  _multiSelectKey.currentState?.validate();
                 },
                 chipDisplay: MultiSelectChipDisplay(
                   onTap: (item) {
                     setState(() {
                       _selectedAnimals3.remove(item);
                     });
-                    _multiSelectKey.currentState.validate();
+                    _multiSelectKey.currentState?.validate();
                   },
                 ),
               ),
@@ -217,7 +217,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: Text("Animals"),
                 headerColor: Colors.blue.withOpacity(0.5),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue[700], width: 1.8),
+                  border: Border.all(color: Colors.blue, width: 1.8),
                 ),
                 selectedChipColor: Colors.blue.withOpacity(0.5),
                 selectedTextStyle: TextStyle(color: Colors.blue[800]),
